@@ -27,7 +27,7 @@ spec:
     spec:
       serviceAccountName: k8s-agent
       containers:
-        - image: wordpress
+        - image: nnvu187/wordpress-custom:latest
           command:
             - '/bin/bash'
             - '-c'
