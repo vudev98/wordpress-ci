@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: wp-deployment
-          image: nnvu187/wordpress-custom:v5
+          image: nnvu187/wordpress-custom:latest
           ports:
           - containerPort: 80
             name: wp-deployment
