@@ -29,7 +29,7 @@ spec:
       containers:
         - image: wordpress
           command:
-            - 'sh'
+            - '/bin/bash'
             - '-c'
           args:
             [
