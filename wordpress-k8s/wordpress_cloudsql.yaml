@@ -20,8 +20,8 @@ spec:
             export WORDPRESS_DB_HOST="{{ .Data.data.db_host }}"
             export WORDPRESS_DB_NAME="{{ .Data.data.db_name }}"
             export WORDPRESS_DB_USER="{{ .Data.data.db_username }}"
-            export WORDPRESS_DB_PASSWORD="{{ .Data.data.db_password }}
-          {{- end -}}
+            export WORDPRESS_DB_PASSWORD="{{ .Data.data.db_password }}"
+          {{- end }}
       labels:
         app: wordpress
     spec:
@@ -32,7 +32,9 @@ spec:
             - 'sh'
             - '-c'
           args:
-            ["source /vault/secrets/wordpress-config && docker-entrypoint.sh apache2-foreground"]
+            [
+              'source /vault/secrets/wordpress-config && docker-entrypoint.sh apache2-foreground',
+            ]
           name: wordpress
           ports:
             - containerPort: 80
