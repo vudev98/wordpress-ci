@@ -5,7 +5,7 @@ environment {
   dockerImage = ""
 } 
 
-  agent kubernetes
+  agent { kubernetes }
 
   stages {
     stage('SCM Checkout') {
@@ -23,16 +23,20 @@ environment {
     }
 
     stage('Deploy Wordpress Image') {
-      script {
-        docker.withRegistry( '', registryCredential ) {
-        dockerImage.push()
+      steps {
+        script {
+          docker.withRegistry( '', registryCredential ) {
+          dockerImage.push()
+          }
         }
       }
     }
 
     stage("Clean up") {
-      script {
-        sh "docker rmi $registry:$BUILD_NUMBER"
+      steps {
+        script {
+          sh "docker rmi $registry:$BUILD_NUMBER"
+        }
       }
     }
   }
