@@ -1,28 +1,17 @@
 podTemplate {
   node(POD_LABEL) {
-    withEnv([
-      "REGISTRY=nnvu187/wordpress-custom",
-      "REGISTRYCREDENTIAL=nnvu-dockerhub",
-      "DOCKERIMAGE=''"
-    ])
 
     stages {
     
       stage('Build Wordpress Image')  {
         steps {
-          script {
-            ${DOCKERIMAGE} = docker.build ${REGISTRY} + ":$BUILD_NUMBER"
-          }
+          sh "docker build -t nnvu187/wordpress-custom ."
         } 
       }
 
-      stage('Deploy Wordpress Image') {
+      stage('Push Wordpress Image') {
         steps {
-          script {
-            docker.withRegistry( '', ${REGISTRYCREDENTIAL} ) {
-            ${DOCKERIMAGE}.push()
-            }
-          }
+          sh "docker push nnvu187/wordpress-custom"
         }
       }
 
