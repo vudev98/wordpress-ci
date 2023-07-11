@@ -5,7 +5,7 @@ environment {
   dockerImage = ""
 } 
 
-  agent { kubernetes }
+  agent kubernetes 
 
   stages {
     stage('SCM Checkout') {
