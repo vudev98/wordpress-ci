@@ -17,9 +17,7 @@ podTemplate {
 
       stage("Clean up") {
         steps {
-          script {
-            sh "docker rmi $registry:$BUILD_NUMBER"
-          }
+            sh "docker rmi nnvu187/wordpress-custom:$BUILD_NUMBER"
         }
       }
     }
