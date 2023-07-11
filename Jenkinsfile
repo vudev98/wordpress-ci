@@ -6,6 +6,10 @@ podTemplate {
         env.PATH = "${dockerHome}/bin:${env.PATH}"
     }
 
+    stage("Cloning git repo") {
+      git 'https://github.com/vudev98/wordpress-ci-cd.git'
+    }
+
     stage("test docker client") {
       sh "docker -v"
     }
