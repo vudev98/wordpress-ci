@@ -7,13 +7,6 @@ environment {
 
   agent any
 
-  stages {
-    stage('SCM Checkout') {
-      steps {
-        git 'https://github.com/vudev98/wordpress-ci-cd.git'
-      }
-    }
-
     stage('Build Wordpress Image')  {
       steps {
         script {
