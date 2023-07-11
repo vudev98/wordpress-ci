@@ -7,7 +7,10 @@ podTemplate {
     }
 
     stage("Cloning git repo") {
-      git 'https://github.com/vudev98/wordpress-ci-cd.git'
+      git ( 
+        branch: 'main',
+        credentialsId: 'github-user1',
+        url:'https://github.com/vudev98/wordpress-ci-cd.git')
     }
 
     stage("test docker client") {
