@@ -1,4 +1,9 @@
-podTemplate {
+podTemplate(label: POD_LABEL, containers: [
+  containerTemplate(
+    name: 'docker',
+    image: 'docker'
+  )
+]) {
   node(POD_LABEL) {
 
     stage('Initialize'){
