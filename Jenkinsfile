@@ -1,37 +1,38 @@
-pipeline {
-environment {
-  registry = "nnvu187/wordpress-custom"
-  registryCredential = "nnvu-dockerhub"
-  dockerImage = ""
-} 
+podTemplate {
+  node(POD_LABEL) {
+    withEnv([
+      "REGISTRY=nnvu187/wordpress-custom",
+      "REGISTRYCREDENTIAL=nnvu-dockerhub",
+      "DOCKERIMAGE=''"
+    ])
 
-  agent any
+    stages {
+    
+      stage('Build Wordpress Image')  {
+        steps {
+          script {
+            ${DOCKERIMAGE} = docker.build ${REGISTRY} + ":$BUILD_NUMBER"
+          }
+        } 
+      }
 
-  stages {
-    stage('Build Wordpress Image')  {
-      steps {
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+      stage('Deploy Wordpress Image') {
+        steps {
+          script {
+            docker.withRegistry( '', ${REGISTRYCREDENTIAL} ) {
+            ${DOCKERIMAGE}.push()
+            }
+          }
         }
-      } 
-    }
+      }
 
-    stage('Deploy Wordpress Image') {
-      steps {
-        script {
-          docker.withRegistry( '', registryCredential ) {
-          dockerImage.push()
+      stage("Clean up") {
+        steps {
+          script {
+            sh "docker rmi $registry:$BUILD_NUMBER"
           }
         }
       }
     }
-
-    stage("Clean up") {
-      steps {
-        script {
-          sh "docker rmi $registry:$BUILD_NUMBER"
-        }
-      }
-    }
   }
-}
+}  
