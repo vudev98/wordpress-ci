@@ -2,7 +2,8 @@ podTemplate(containers: [
   containerTemplate(
     name: 'docker',
     image: 'docker',
-    command: 'cat'
+    command: 'cat',
+    tty: true
   )
 ]) {
   node(POD_LABEL) {
