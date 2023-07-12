@@ -2,7 +2,6 @@ podTemplate(containers: [
   containerTemplate(
     name: 'docker',
     image: 'docker',
-    args: '--privileged',
     command: 'cat'
   )
 ]) {
