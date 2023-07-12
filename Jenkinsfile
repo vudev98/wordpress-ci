@@ -2,7 +2,8 @@ podTemplate(containers: [
   containerTemplate(
     name: 'docker',
     image: 'docker',
-    args: ['--privileged', 'cat']
+    args: '--privileged',
+    command: 'cat'
   )
 ]) {
   node(POD_LABEL) {
