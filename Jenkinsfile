@@ -22,7 +22,7 @@ podTemplate(containers: [
 
       stage("Docker Login") {
         withCredentials([usernamePassword(credentialsId: 'nnvu-dockerhub', usernameVariable: 'user', passwordVariable: 'password' )]) {
-          sh "echo ${password} | docker login --username $user --password-stdin"
+          sh "docker login --username $user --password $password" 
         }
       }
 
