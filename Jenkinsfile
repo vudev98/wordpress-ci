@@ -12,6 +12,10 @@ podTemplate(containers: [
           env.PATH = "${dockerHome}/bin:${env.PATH}"
       }
 
+      stage('Checkout SCM') {
+        checkout scm
+      }
+
       stage('Build Wordpress Image')  {
           sh "docker build -t nnvu187/wordpress-custom ."
       }
