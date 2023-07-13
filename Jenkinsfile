@@ -29,10 +29,6 @@ podTemplate(containers: [
       stage('Push Wordpress Image') {
           sh "docker push nnvu187/wordpress-custom"
       }
-
-      stage("Clean up") {
-          sh "docker rmi nnvu187/wordpress-custom:$BUILD_NUMBER"    
-      }
     }
   }
 }
