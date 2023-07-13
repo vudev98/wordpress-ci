@@ -7,7 +7,9 @@ podTemplate(containers: [
   ),
   containerTemplate(
     name: 'unix',
-    image: 'bitnami/kubectl'
+    image: 'bitnami/kubectl',
+    ttyEnabled: true,
+    privileged: true
   )]) {
   node(POD_LABEL) {
     container('docker'){
