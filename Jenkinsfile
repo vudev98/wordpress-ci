@@ -8,6 +8,7 @@ podTemplate(containers: [
   containerTemplate(
     name: 'unix',
     image: 'bitnami/kubectl',
+    command: 'cat',
     ttyEnabled: true,
     privileged: true
   )]) {
