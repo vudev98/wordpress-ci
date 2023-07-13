@@ -18,8 +18,8 @@ podTemplate(containers: [
 
       stage("Docker Login") {
         withCredentials([usernamePassword(credentialsId: 'nnvu-dockerhub', usernameVariable: 'user', passwordVariable: 'password' )]) {
-          
-        sh "echo ${password} | docker login --username $user --password-stdin"
+          sh "echo ${password} | docker login --username $user --password-stdin"
+        }
       }
 
       stage('Push Wordpress Image') {
