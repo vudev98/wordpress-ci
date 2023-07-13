@@ -2,7 +2,7 @@ podTemplate(containers: [
   containerTemplate(
     name: 'docker',
     image: 'docker',
-    command: '$ docker run --privileged'
+    command: '$ docker run --privileged',
     ttyEnabled: true,
   )],
   volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
