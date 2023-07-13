@@ -27,7 +27,11 @@ podTemplate(containers: [
       }
 
       stage('Push Wordpress Image') {
-          sh "docker push nnvu187/wordpress-custom"
+        sh "docker push nnvu187/wordpress-custom"
+      }
+
+      stage('Deploy Wordpress') {
+        sh "cd ./wordpress-ci && kubectl apply -f ."
       }
     }
   }
