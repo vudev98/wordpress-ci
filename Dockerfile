@@ -7,4 +7,4 @@ RUN apt update && \
 
 RUN rm -rf /var/www/html/wp-admin/about.php
 
-COPY about.php /usr/src/wordpress/wp-admin
+COPY ./wordpress-docker/about.php /usr/src/wordpress/wp-admin
