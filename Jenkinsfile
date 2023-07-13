@@ -4,16 +4,16 @@ podTemplate(containers: [
     image: 'docker',
     ttyEnabled: true,
     privileged: true
+  ),
+  containerTemplate(
+    name: 'unix',
+    image: 'bitnami/kubectl'
   )]) {
   node(POD_LABEL) {
     container('docker'){
       stage('Initialize'){
           def dockerHome = tool 'DockerTool'
           env.PATH = "${dockerHome}/bin:${env.PATH}"
-      }
-
-      stage('Test Wordpress') {
-        sleep 300000
       }
 
       stage('Checkout SCM') {
@@ -32,10 +32,12 @@ podTemplate(containers: [
 
       stage('Push Wordpress Image') {
         sh "docker push nnvu187/wordpress-custom"
-      } "cd ./wordpress-ci && kubectl apply -f ."
+      }
+    }
 
-      stage('Deploy Wordpress') {
-        sleep 300000
+    stage('Deploy') {
+      container('unix') {
+        sh "cd ./wordpress-ci && kubectl apply -f ."
       }
     }
   }
