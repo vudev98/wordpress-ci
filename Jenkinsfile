@@ -3,8 +3,8 @@ podTemplate(containers: [
     name: 'docker',
     image: 'docker',
     ttyEnabled: true,
-    volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
-  )]) {
+  )],
+  volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
   node(POD_LABEL) {
     container('docker'){
       stage('Initialize'){
