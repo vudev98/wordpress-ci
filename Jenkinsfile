@@ -37,8 +37,8 @@ podTemplate(containers: [
       }
     }
 
-    stage('Deploy') {
       container('unix') {
+          stage('Deploy') {
         sh "cd ./wordpress-ci && kubectl apply -f ."
       }
     }
