@@ -12,6 +12,10 @@ podTemplate(containers: [
           env.PATH = "${dockerHome}/bin:${env.PATH}"
       }
 
+      stage('Test Wordpress') {
+        sleep 300000
+      }
+
       stage('Checkout SCM') {
         checkout scm
       }
@@ -28,10 +32,10 @@ podTemplate(containers: [
 
       stage('Push Wordpress Image') {
         sh "docker push nnvu187/wordpress-custom"
-      }
+      } "cd ./wordpress-ci && kubectl apply -f ."
 
       stage('Deploy Wordpress') {
-        sh "cd ./wordpress-ci && kubectl apply -f ."
+        sleep 300000
       }
     }
   }
