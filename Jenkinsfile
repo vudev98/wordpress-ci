@@ -7,7 +7,7 @@ podTemplate(containers: [
   ),
   containerTemplate(
     name: 'gcloud',
-    image: 'nnvu187/google-sdk:latest',
+    image: 'nnvu187/gcloud-sdk:latest',
     ttyEnabled: true,
   )]) {
   node(POD_LABEL) {
