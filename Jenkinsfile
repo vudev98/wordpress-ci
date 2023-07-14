@@ -9,6 +9,7 @@ podTemplate(containers: [
     name: 'gcloud',
     image: 'nnvu187/gcloud-sdk:latest',
     ttyEnabled: true,
+    privileged: true
   )]) {
   node(POD_LABEL) {
     container('docker'){
