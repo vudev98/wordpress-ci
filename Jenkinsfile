@@ -36,9 +36,10 @@ podTemplate(containers: [
       }
     }
 
+    container('gcloud') {
       stage('Gcloud login') {
         sh "gcloud container clusters get-credentials cluster-1 --zone asia-south2-a --project applied-terrain-390603"
       }
     }
-  }
+  }  
 }
