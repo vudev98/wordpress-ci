@@ -38,15 +38,16 @@ podTemplate(containers: [
     //   }
     // }
 
-    container('gcloud') {
-      stage('Gcloud Authorize') {
-        sh "cloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=/applied-terrain-390603-74569b4dff16.json --project=applied-terrain-390603"
-      }
+        container('gcloud') {
+          stage('Gcloud Authorize') {
+            sh "cloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=/applied-terrain-390603-74569b4dff16.json --project=applied-terrain-390603"
+          }
 
-      container('gcloud') {s
-        stage('Gcloud login') {
-          sh "gcloud container clusters get-credentials cluster-1 --zone asia-south2-a --project applied-terrain-390603"
+        container('gcloud') {s
+          stage('Gcloud login') {
+            sh "gcloud container clusters get-credentials cluster-1 --zone asia-south2-a --project applied-terrain-390603"
+        }
       }
-    }
-  }  
+    }  
+  }
 }
