@@ -6,11 +6,9 @@ podTemplate(containers: [
     privileged: true
   ),
   containerTemplate(
-    name: 'unix',
-    image: 'bitnami/kubectl',
-    command: 'cat',
+    name: 'gcloud',
+    image: 'google/cloud-sdk',
     ttyEnabled: true,
-    privileged: true
   )]) {
   node(POD_LABEL) {
     container('docker'){
@@ -38,9 +36,9 @@ podTemplate(containers: [
       }
     }
 
-      container('unix') {
-          stage('Deploy') {
-        sh "kubectl version"
+    container('gcloud') {
+      stage('Get Kubectl Tool') {
+        sh "gcloud components install kubectl && kubectl version"
       }
     }
   }
