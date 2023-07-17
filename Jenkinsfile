@@ -40,7 +40,7 @@ podTemplate(containers: [
     container('gcloud') {
       
       stage('Gcloud Authorize') {
-        sh "env"
+        sh " echo $PATH"
         sh "gcloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=applied-terrain-390603-74569b4dff16.json --project=applied-terrain-390603"
       }
 
