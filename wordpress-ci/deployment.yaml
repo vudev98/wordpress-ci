@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wordpress-custom
-  namespace: jenkins
+  namespace: default
   labels:
     app: wp-custom
 spec:
-  replicas: 1 
+  replicas: 1
   selector:
     matchLabels:
       app: wp-custom
@@ -19,14 +19,14 @@ spec:
         - name: wp-deployment
           image: nnvu187/wordpress-custom:latest
           ports:
-          - containerPort: 80
-            name: wp-deployment
+            - containerPort: 80
+              name: wp-deployment
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: wordpress
-  namespace: jenkins
+  namespace: default
   labels:
     app: wp-custom
 spec:
