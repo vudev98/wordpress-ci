@@ -17,10 +17,10 @@ podTemplate(containers: [
     checkout scm
 
     container('docker'){
-      stage('Initialize'){
-          def dockerHome = tool 'DockerTool'
-          env.PATH = "${dockerHome}/bin:${env.PATH}"
-      }
+      // stage('Initialize'){
+      //     def dockerHome = tool 'DockerTool'
+      //     env.PATH = "${dockerHome}/bin:${env.PATH}"
+      // }
 
       stage('Build Wordpress Image')  {
           sh "docker build -t nnvu187/wordpress-custom ."
