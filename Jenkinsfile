@@ -41,7 +41,6 @@ podTemplate(containers: [
       
       stage('Gcloud Authorize') {
         sh " echo $PATH"
-        sh "sleep 400000"
         sh "gcloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=applied-terrain-390603-74569b4dff16.json --project=applied-terrain-390603"
       }
 
