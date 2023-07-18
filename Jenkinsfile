@@ -44,6 +44,10 @@ podTemplate(containers: [
         sh "gcloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=applied-terrain-390603-74569b4dff16.json --project=applied-terrain-390603"
       }
 
+      stage('Get Cluster Config') {
+        sh "gcloud container clusters get-credentials cluster-1 --zone asia-south2-a --project applied-terrain-390603"
+      }
+
       stage('Deploy Wordpress') {
         sh "kubectl apply -f ./wordpress-ci/deployment.yaml"
       } 
