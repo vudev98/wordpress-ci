@@ -7,12 +7,19 @@ podTemplate(containers: [
   ),
   containerTemplate(
     name: 'gcloud',
-    image: 'nnvu187/gcloud-sdk:latest',
+    image: 'nnvu187/gcloud-sdk:latest', 
     ttyEnabled: true,
     privileged: true,
     alwaysPullImage :true
   )]) {
   node(POD_LABEL) {
+    def secrets = [
+      [
+        path: 'kv-secret/gcloud-credential-key', secretValues: [[ envVar: 'GCLOUD_KEY', vaultKey: 'gcloud-key'],[]]
+      ]
+    ]
+
+    def configuration = [vaultUrl: 'http://34.131.55.105:8200/', vaultCredentialId: 'kv-secret-holder']
 
     checkout scm
 
@@ -41,7 +48,10 @@ podTemplate(containers: [
       
       stage('Gcloud Authorize') {
         sh " echo $PATH"
-        sh "gcloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=applied-terrain-390603-74569b4dff16.json --project=applied-terrain-390603"
+        withVault([configuration: configuration, vaultSecrets: secrets]) {
+          sh "gcloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=$GCLOUD_KEY --project=applied-terrain-390603"
+        } 
+
       }
 
       stage('Get Cluster Config') {
