@@ -15,7 +15,7 @@ podTemplate(containers: [
   node(POD_LABEL) {
     def secrets = [
       [
-        path: '', secretValues: 
+        secretValues: 
         [
           [ envVar: 'GCLOUD_KEY', vaultKey: 'gcloud-key']
         ]
