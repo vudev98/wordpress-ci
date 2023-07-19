@@ -15,7 +15,10 @@ podTemplate(containers: [
   node(POD_LABEL) {
     def secrets = [
       [
-        path: 'kv-secret/gcloud-credential-key', secretValues: [[ envVar: 'GCLOUD_KEY', vaultKey: 'gcloud-key'],[]]
+        path: 'kv-secret/gcloud-credential-key', secretValues: 
+        [
+          [ envVar: 'GCLOUD_KEY', vaultKey: 'gcloud-key']
+        ]
       ]
     ]
 
@@ -47,8 +50,8 @@ podTemplate(containers: [
     container('gcloud') {
       
       stage('Gcloud Authorize') {
-        sh " echo $PATH"
         withVault([configuration: configuration, vaultSecrets: secrets]) {
+          sh "echo $GCLOUD_KEY"
           sh "gcloud auth activate-service-account 350373098194-compute@developer.gserviceaccount.com --key-file=$GCLOUD_KEY --project=applied-terrain-390603"
         } 
 
